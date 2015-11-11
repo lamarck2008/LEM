@@ -14,7 +14,7 @@ python 1-nmfRankEstimation.py --help
 ```
 To run the script
 ```
-python 1-nmfRankEstimation.py --f <File Name> -n <Number of Runs> -s <Start Rank> -e <End Rank>
+python 1-nmfRankEstimation.py -f <File Name> -n <Number of Runs> -s <Start Rank> -e <End Rank>
 ```
 
 #### 2. Calculate the W matrix
