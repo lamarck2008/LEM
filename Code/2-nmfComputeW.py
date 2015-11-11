@@ -64,8 +64,17 @@ def compute_w(data, rank, method="nmf", max_iter=2000):
    return np.array(fctr_res.basis())
 
 if __name__ == "__main__":
-   file_name = sys.argv[1]
-   rank = int(sys.argv[2])
+   parser = OptionParser()
+   parser.add_option("-f", "--file", dest="filename",
+                help="gct file used for rank estimation", metavar="FILE")
+   parser.add_option("-r", "--rank", dest="rank",
+                  help="number of columns for W matrix", metavar="NRUN")
+
+   (options, args) = parser.parse_args()
+
+   file_name = options.filename
+   rank = options.rank
+
    data = read_data(file_name)
    print data.shape
 

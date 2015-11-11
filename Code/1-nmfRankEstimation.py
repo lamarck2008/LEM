@@ -13,7 +13,7 @@ def read_data(filename):
 		# Skip first two rows for the gct file
 		for i in range(3):
 			f.readline()
-		
+
 		for line in f:
 			data = line.strip().split("\t")[2:]
 			data_array.append(data)
@@ -44,20 +44,20 @@ if __name__ == "__main__":
 
   (options, args) = parser.parse_args()
   file_name = options.filename
-  nrun = options.nrun
-  start = options.start
-  end = options.end
-
+  nrun = int(options.nrun)
+  start = int(options.start)
+  end = int(options.end)
 
   data = read_data(file_name)
-  print 'The dimension of data is: ' + data.shape
+  print data.shape
+  print 'The dimension of data is: ' + str(data.shape[0]) + ' ' + str(data.shape[1])
 
   res_list = []
 
-  dirname = os.path.split(file_name)[0]
-  parent_dir = os.path.split(dirname)[0]
-  parent_dir = os.path.split(parent_dir)[0]
-  sub_folder = os.path.split(dirname)[1]
+  # dirname = os.path.split(file_name)[0]
+  # parent_dir = os.path.split(dirname)[0]
+  # parent_dir = os.path.split(parent_dir)[0]
+  # sub_folder = os.path.split(dirname)[1]
 
   for i in range(nrun):
      res = factor_eval(data.T, ranks=range(start, end+1), method="nmf", max_iter=1000, nrun=20)
@@ -65,9 +65,9 @@ if __name__ == "__main__":
      plt.plot(range(start , end+1), res, 'r--', range(start, end+1), res, 'bo')
      plt.ylabel("cophenetic coefficient")
      plt.xlabel("Factors")
-     plt.savefig(os.path.join(parent_dir, "Result", sub_folder) + "/" + os.path.basename(file_name) + "." + str(i) + '.pdf') 
+     plt.savefig(os.path.join("..", "Result") + "/" + os.path.basename(file_name) + "." + str(i) + '.pdf') 
 
-  with open(os.path.join(parent_dir, "Result", sub_folder) + "/" + os.path.basename(file_name) + "." + "cophentic" + ".txt", 'w') as f:
+  with open(os.path.join("..", "Result") + "/" + os.path.basename(file_name) + "." + "cophentic" + ".txt", 'w') as f:
      for res in res_list:
         f.write("\t".join(map(lambda x : str(x), res)))
         f.write("\n")    
