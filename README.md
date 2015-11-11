@@ -19,6 +19,6 @@ To run the script: python 2-nmfComputeW.py -r <Number of Runs>
 Rscript 3-calculate.cutoff.R <File Name>
 The file used here is produced in the step 2
 
-## Assign membership
+## 4. Assign membership
 Rscript 4-NMF.Membership.Assign.R <File Name> <Threshold>
 The file used here is the same as step 3 and threshold is decided based on the calculation in step 3
